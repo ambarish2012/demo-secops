@@ -1,0 +1,77 @@
+jobs:
+
+#---------------------------------------------------------------#
+#---------------------------- SecOps ---------------------------#
+#---------------------------------------------------------------#
+
+# Set up Network - AWS IAM roles, profiles, VPCs etc. with TERRAFORM
+  - name: setup_net
+    type: runCLI
+    steps:
+      - IN: net_tf_state
+      - IN: net_conf
+      - IN: aws_creds
+        switch: off
+      - IN: auto_repo
+        switch: off
+      - TASK:
+        - script: . /build/IN/auto_repo/gitRepo/infra/shipUtil.sh
+        - script: . /build/IN/auto_repo/gitRepo/infra/awsSetupIAM/provNetwork.sh create
+      - OUT: ami_vpc_conf
+      - OUT: test_vpc_conf
+      - OUT: prod_vpc_conf
+      - OUT: net_tf_state
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILURE"
+    always:
+      - script: . /build/IN/auto_repo/gitRepo/infra/shipUtil.sh && . /build/IN/auto_repo/gitRepo/infra/archiveState.sh infra/awsSetupIAM net_tf_state
+    flags:
+      - e2eShippableDemo
+
+# Build Machine image - AWS AMI used to deploy ECS VMs with PACKER
+  - name: build_ecs_ami
+    type: runCLI
+    steps:
+      - IN: aws_creds
+        switch: off
+      - IN: auto_repo
+        switch: off
+      - IN: ami_vpc_conf
+      - TASK:
+        - script: . IN/auto_repo/gitRepo/infra/shipUtil.sh
+        - script: . IN/auto_repo/gitRepo/infra/awsBuildAMI/basePack.sh
+      - OUT: ami_sec_approved
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILURE"
+    flags:
+      - e2eShippableDemo
+
+# Deprovision Network
+  - name: de_prov_net
+    type: runCLI
+    steps:
+      - IN: setup_net
+        switch: off
+      - IN: net_tf_state
+      - IN: net_conf
+        switch: off
+      - IN: aws_creds
+        switch: off
+      - IN: auto_repo
+        switch: off
+      - TASK:
+        - script: . /build/IN/auto_repo/gitRepo/infra/shipUtil.sh
+        - script: . /build/IN/auto_repo/gitRepo/infra/awsSetupIAM/provNetwork.sh destroy
+      - OUT: net_tf_state
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILURE"
+    always:
+      - script: . /build/IN/auto_repo/gitRepo/infra/shipUtil.sh && . /build/IN/auto_repo/gitRepo/infra/archiveState.sh infra/awsSetupIAM net_tf_state
+    flags:
+      - e2eShippableDemo

@@ -1,0 +1,89 @@
+resources:
+
+#---------------------------------------------------------------#
+#--------------------------- SecOps ----------------------------#
+#---------------------------------------------------------------#
+
+# Automation scripts repo
+  - name: auto_repo
+    type: gitRepo
+    integration: "ttrahan-gh"
+    pointer:
+      sourceName: "ttrahan/e2eShippableDemo"
+      branch: master
+    flags:
+      - e2eShippableDemo
+
+# AWS credentials
+  - name: aws_creds
+    type: integration
+    integration: "ttrahan-aws"
+    flags:
+      - e2eShippableDemo
+
+# AWS PEM key
+  - name: aws_pem
+    type: integration
+    integration: "demo-key"
+    flags:
+      - e2eShippableDemo
+
+# Networking Terraform State
+  - name: net_tf_state
+    type: state
+    flags:
+      - e2eShippableDemo
+
+# VPC Creation Config
+  - name: net_conf
+    type: params
+    version:
+      params:
+        REGION: "us-east-1"
+        AMI_VPC: "ami_vpc"
+        AMI_NETWORK_CIDR: "200.0.0.0/16"
+        AMI_PUBLIC_CIDR: "200.0.0.0/24"
+        TEST_VPC: "test_vpc"
+        TEST_NETWORK_CIDR: "210.0.0.0/16"
+        TEST_PUBLIC_CIDR: "210.0.0.0/24"
+        PROD_VPC: "prod_vpc"
+        PROD_NETWORK_CIDR: "100.0.0.0/16"
+        PROD_PUBLIC_CIDR: "100.0.0.0/24"
+    flags:
+      - e2eShippableDemo
+
+# Base ECS AMI ID
+  - name: ami_sec_approved
+    type: params
+    version:
+      params:
+        SEED: "initial_version"
+    flags:
+      - e2eShippableDemo
+
+# OUT AWS AMI VPC IDs
+  - name: ami_vpc_conf
+    type: params
+    version:
+      params:
+        SEED: "initial_version"
+    flags:
+      - e2eShippableDemo
+
+# OUT AWS TEST VPC IDs
+  - name: test_vpc_conf
+    type: params
+    version:
+      params:
+        SEED: "initial_version"
+    flags:
+      - e2eShippableDemo
+
+# OUT AWS PROD VPC IDs
+  - name: prod_vpc_conf
+    type: params
+    version:
+      params:
+        SEED: "initial_version"
+    flags:
+      - e2eShippableDemo
