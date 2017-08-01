@@ -7,9 +7,9 @@ resources:
 # Automation scripts repo
   - name: auto_repo
     type: gitRepo
-    integration: "ttrahan-gh"
+    integration: "demo-secops-github"
     pointer:
-      sourceName: "ttrahan/e2eShippableDemo"
+      sourceName: "aye0aye/demo-secops"
       branch: master
     flags:
       - e2eShippableDemo
@@ -17,14 +17,14 @@ resources:
 # AWS credentials
   - name: aws_creds
     type: integration
-    integration: "ttrahan-aws"
+    integration: "dr-aws"
     flags:
       - e2eShippableDemo
 
 # AWS PEM key
   - name: aws_pem
     type: integration
-    integration: "demo-key"
+    integration: "dr-keypair-us-east"
     flags:
       - e2eShippableDemo
 
