@@ -95,6 +95,11 @@ resource "aws_security_group" "ami_public_sg" {
 }
 
 #========================== TEST VPC =============================
+
+# Declare the data source
+data "aws_availability_zones" "available" {}
+
+
 # Define a vpc
 resource "aws_vpc" "test_vpc" {
   cidr_block = "${var.test_network_cidr}"
@@ -112,10 +117,22 @@ resource "aws_internet_gateway" "test_ig" {
 }
 
 # Public subnet
-resource "aws_subnet" "test_public_sn" {
+resource "aws_subnet" "test_public_sn_01" {
   vpc_id = "${aws_vpc.test_vpc.id}"
   cidr_block = "${var.test_public_cidr}"
-  availability_zone = "${lookup(var.availability_zone, var.region)}"
+  availability_zone = "${data.aws_aws_availability_zones.available.names[0]}"
+  # availability_zone = "${lookup(var.availability_zone, var.region)}"
+  tags {
+    Name = "test_public_sn"
+  }
+}
+
+# Public subnet
+resource "aws_subnet" "test_public_sn_02" {
+  vpc_id = "${aws_vpc.test_vpc.id}"
+  cidr_block = "${var.test_public_cidr}"
+  availability_zone = "${data.aws_aws_availability_zones.available.names[1]}"
+  # availability_zone = "${lookup(var.availability_zone, var.region)}"
   tags {
     Name = "test_public_sn"
   }
