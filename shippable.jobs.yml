@@ -6,7 +6,7 @@ jobs:
 
 # Set up Network - AWS IAM roles, profiles, VPCs etc. with TERRAFORM
   - name: setup_net
-    type: runCLI
+    type: runSh
     steps:
       - IN: net_tf_state
       - IN: net_conf
@@ -32,7 +32,7 @@ jobs:
 
 # Build Machine image - AWS AMI used to deploy ECS VMs with PACKER
   - name: build_ecs_ami
-    type: runCLI
+    type: runSh
     steps:
       - IN: aws_creds
         switch: off
@@ -52,7 +52,7 @@ jobs:
 
 # Deprovision Network
   - name: de_prov_net
-    type: runCLI
+    type: runSh
     steps:
       - IN: setup_net
         switch: off
