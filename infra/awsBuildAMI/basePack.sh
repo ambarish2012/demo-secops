@@ -3,7 +3,7 @@ set -o pipefail
 
 export CURR_JOB="build_ecs_ami"
 export CURR_JOB_CONTEXT="infra/awsBuildAMI"
-export RES_REPO="auto_repo"
+export RES_REPO="secops_repo"
 export RES_VPC_AMI="ami_vpc_conf"
 export RES_AWS_CREDS="aws_creds"
 export OUT_AMI_SEC_APPRD="ami_sec_approved"
