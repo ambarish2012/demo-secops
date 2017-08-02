@@ -116,7 +116,7 @@ resource "aws_internet_gateway" "test_ig" {
   }
 }
 
-# Public subnet
+# Public subnet 1
 resource "aws_subnet" "test_public_sn_01" {
   vpc_id = "${aws_vpc.test_vpc.id}"
   cidr_block = "${var.test_public_cidr}"
@@ -127,7 +127,7 @@ resource "aws_subnet" "test_public_sn_01" {
   }
 }
 
-# Public subnet
+# Public subnet 2
 resource "aws_subnet" "test_public_sn_02" {
   vpc_id = "${aws_vpc.test_vpc.id}"
   cidr_block = "${var.test_public_cidr}"
@@ -138,22 +138,40 @@ resource "aws_subnet" "test_public_sn_02" {
   }
 }
 
-# Routing table for public subnet
-resource "aws_route_table" "test_public_sn_rt" {
+# Routing table for public subnet 1
+resource "aws_route_table" "test_public_sn_rt_01" {
   vpc_id = "${aws_vpc.test_vpc.id}"
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.test_ig.id}"
   }
   tags {
-    Name = "test_public_sn_rt"
+    Name = "test_public_sn_rt_01"
   }
 }
 
-# Associate the routing table to public subnet
-resource "aws_route_table_association" "test_public_sn_rt_assn" {
-  subnet_id = "${aws_subnet.test_public_sn.id}"
-  route_table_id = "${aws_route_table.test_public_sn_rt.id}"
+# Associate the routing table to public subnet 1
+resource "aws_route_table_association" "test_public_sn_rt_01_assn" {
+  subnet_id = "${aws_subnet.test_public_sn_01.id}"
+  route_table_id = "${aws_route_table.test_public_sn_rt_01.id}"
+}
+
+# Routing table for public subnet 2
+resource "aws_route_table" "test_public_sn_rt_02" {
+  vpc_id = "${aws_vpc.test_vpc.id}"
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.test_ig.id}"
+  }
+  tags {
+    Name = "test_public_sn_rt_02"
+  }
+}
+
+# Associate the routing table to public subnet 2
+resource "aws_route_table_association" "test_public_sn_rt_assn_02" {
+  subnet_id = "${aws_subnet.test_public_sn_02.id}"
+  route_table_id = "${aws_route_table.test_public_sn_rt_02.id}"
 }
 
 # ECS Instance Security group
@@ -224,32 +242,90 @@ resource "aws_internet_gateway" "prod_ig" {
   }
 }
 
-# Public subnet
-resource "aws_subnet" "prod_public_sn" {
+## Public subnet
+#resource "aws_subnet" "prod_public_sn" {
+#  vpc_id = "${aws_vpc.prod_vpc.id}"
+#  cidr_block = "${var.prod_public_cidr}"
+#  availability_zone = "${lookup(var.availability_zone, var.region)}"
+#  tags {
+#    Name = "prod_public_sn"
+#  }
+#}
+#
+## Routing table for public subnet
+#resource "aws_route_table" "prod_public_sn_rt" {
+#  vpc_id = "${aws_vpc.prod_vpc.id}"
+#  route {
+#    cidr_block = "0.0.0.0/0"
+#    gateway_id = "${aws_internet_gateway.prod_ig.id}"
+#  }
+#  tags {
+#    Name = "prod_public_sn_rt"
+#  }
+#}
+#
+## Associate the routing table to public subnet
+#resource "aws_route_table_association" "prod_public_sn_rt_assn" {
+#  subnet_id = "${aws_subnet.prod_public_sn.id}"
+#  route_table_id = "${aws_route_table.prod_public_sn_rt.id}"
+#}
+
+# Public subnet 1
+resource "aws_subnet" "prod_public_sn_01" {
   vpc_id = "${aws_vpc.prod_vpc.id}"
   cidr_block = "${var.prod_public_cidr}"
-  availability_zone = "${lookup(var.availability_zone, var.region)}"
+  availability_zone = "${data.aws_aws_availability_zones.available.names[0]}"
+  # availability_zone = "${lookup(var.availability_zone, var.region)}"
   tags {
     Name = "prod_public_sn"
   }
 }
 
-# Routing table for public subnet
-resource "aws_route_table" "prod_public_sn_rt" {
+# Public subnet 2
+resource "aws_subnet" "prod_public_sn_02" {
+  vpc_id = "${aws_vpc.prod_vpc.id}"
+  cidr_block = "${var.prod_public_cidr}"
+  availability_zone = "${data.aws_aws_availability_zones.available.names[1]}"
+  # availability_zone = "${lookup(var.availability_zone, var.region)}"
+  tags {
+    Name = "prod_public_sn"
+  }
+}
+
+# Routing table for public subnet 1
+resource "aws_route_table" "prod_public_sn_rt_01" {
   vpc_id = "${aws_vpc.prod_vpc.id}"
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.prod_ig.id}"
   }
   tags {
-    Name = "prod_public_sn_rt"
+    Name = "prod_public_sn_rt_01"
   }
 }
 
-# Associate the routing table to public subnet
-resource "aws_route_table_association" "prod_public_sn_rt_assn" {
-  subnet_id = "${aws_subnet.prod_public_sn.id}"
-  route_table_id = "${aws_route_table.prod_public_sn_rt.id}"
+# Associate the routing table to public subnet 1
+resource "aws_route_table_association" "prod_public_sn_rt_01_assn" {
+  subnet_id = "${aws_subnet.prod_public_sn_01.id}"
+  route_table_id = "${aws_route_table.prod_public_sn_rt_01.id}"
+}
+
+# Routing table for public subnet 2
+resource "aws_route_table" "prod_public_sn_rt_02" {
+  vpc_id = "${aws_vpc.prod_vpc.id}"
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.prod_ig.id}"
+  }
+  tags {
+    Name = "prod_public_sn_rt_02"
+  }
+}
+
+# Associate the routing table to public subnet 2
+resource "aws_route_table_association" "prod_public_sn_rt_assn_02" {
+  subnet_id = "${aws_subnet.prod_public_sn_02.id}"
+  route_table_id = "${aws_route_table.prod_public_sn_rt_02.id}"
 }
 
 # ECS Instance Security group
