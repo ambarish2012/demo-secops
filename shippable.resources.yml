@@ -5,7 +5,7 @@ resources:
 #---------------------------------------------------------------#
 
 # Automation scripts repo
-  - name: auto_repo
+  - name: secops_repo
     type: gitRepo
     integration: "demo-secops-github"
     pointer:

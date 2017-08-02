@@ -12,11 +12,11 @@ jobs:
       - IN: net_conf
       - IN: aws_creds
         switch: off
-      - IN: auto_repo
+      - IN: secops_repo
         switch: off
       - TASK:
-        - script: . /build/IN/auto_repo/gitRepo/infra/shipUtil.sh
-        - script: . /build/IN/auto_repo/gitRepo/infra/awsSetupIAM/provNetwork.sh create
+        - script: . /build/IN/secops_repo/gitRepo/infra/shipUtil.sh
+        - script: . /build/IN/secops_repo/gitRepo/infra/awsSetupIAM/provNetwork.sh create
       - OUT: ami_vpc_conf
       - OUT: test_vpc_conf
       - OUT: prod_vpc_conf
@@ -26,7 +26,7 @@ jobs:
     on_failure:
       - script: echo "FAILURE"
     always:
-      - script: . /build/IN/auto_repo/gitRepo/infra/shipUtil.sh && . /build/IN/auto_repo/gitRepo/infra/archiveState.sh infra/awsSetupIAM net_tf_state
+      - script: . /build/IN/secops_repo/gitRepo/infra/shipUtil.sh && . /build/IN/secops_repo/gitRepo/infra/archiveState.sh infra/awsSetupIAM net_tf_state
     flags:
       - e2eShippableDemo
 
@@ -36,12 +36,12 @@ jobs:
     steps:
       - IN: aws_creds
         switch: off
-      - IN: auto_repo
+      - IN: secops_repo
         switch: off
       - IN: ami_vpc_conf
       - TASK:
-        - script: . IN/auto_repo/gitRepo/infra/shipUtil.sh
-        - script: . IN/auto_repo/gitRepo/infra/awsBuildAMI/basePack.sh
+        - script: . IN/secops_repo/gitRepo/infra/shipUtil.sh
+        - script: . IN/secops_repo/gitRepo/infra/awsBuildAMI/basePack.sh
       - OUT: ami_sec_approved
     on_success:
       - script: echo "SUCCESS"
@@ -61,17 +61,17 @@ jobs:
         switch: off
       - IN: aws_creds
         switch: off
-      - IN: auto_repo
+      - IN: secops_repo
         switch: off
       - TASK:
-        - script: . /build/IN/auto_repo/gitRepo/infra/shipUtil.sh
-        - script: . /build/IN/auto_repo/gitRepo/infra/awsSetupIAM/provNetwork.sh destroy
+        - script: . /build/IN/secops_repo/gitRepo/infra/shipUtil.sh
+        - script: . /build/IN/secops_repo/gitRepo/infra/awsSetupIAM/provNetwork.sh destroy
       - OUT: net_tf_state
     on_success:
       - script: echo "SUCCESS"
     on_failure:
       - script: echo "FAILURE"
     always:
-      - script: . /build/IN/auto_repo/gitRepo/infra/shipUtil.sh && . /build/IN/auto_repo/gitRepo/infra/archiveState.sh infra/awsSetupIAM net_tf_state
+      - script: . /build/IN/secops_repo/gitRepo/infra/shipUtil.sh && . /build/IN/secops_repo/gitRepo/infra/archiveState.sh infra/awsSetupIAM net_tf_state
     flags:
       - e2eShippableDemo
