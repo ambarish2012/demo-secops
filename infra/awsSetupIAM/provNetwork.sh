@@ -8,7 +8,7 @@ export OUT_AMI_VPC="ami_vpc_conf"
 export OUT_TEST_VPC="test_vpc_conf"
 export OUT_PROD_VPC="prod_vpc_conf"
 
-export RES_REPO="auto_repo"
+export RES_REPO="secops_repo"
 export RES_AWS_CREDS="aws_creds"
 export RES_AWS_PEM="aws_pem"
 export TF_STATEFILE="terraform.tfstate"
