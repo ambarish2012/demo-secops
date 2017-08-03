@@ -102,7 +102,8 @@ data "aws_availability_zones" "available" {}
 
 # Define a vpc
 resource "aws_vpc" "test_vpc" {
-  cidr_block = "${var.test_network_cidr}"
+  cidr_block = "${var.test_network_01_cidr}"
+  cidr_block = "${var.test_network_02_cidr}"
   tags {
     Name = "${var.test_vpc}"
   }
@@ -209,7 +210,8 @@ resource "aws_security_group" "test_public_sg" {
     to_port = 0
     protocol = "tcp"
     cidr_blocks = [
-      "${var.test_public_cidr}"]
+      "${var.test_public_01_cidr}"]
+      "${var.test_public_02_cidr}"]
   }
 
   egress {
@@ -228,7 +230,8 @@ resource "aws_security_group" "test_public_sg" {
 #========================== PROD VPC =============================
 # Define a vpc
 resource "aws_vpc" "prod_vpc" {
-  cidr_block = "${var.prod_network_cidr}"
+  cidr_block = "${var.prod_network_01_cidr}"
+  cidr_block = "${var.prod_network_02_cidr}"
   tags {
     Name = "${var.prod_vpc}"
   }
@@ -363,7 +366,8 @@ resource "aws_security_group" "prod_public_sg" {
     to_port = 0
     protocol = "tcp"
     cidr_blocks = [
-      "${var.test_public_cidr}"]
+      "${var.prod_public_01_cidr}"]
+      "${var.prod_public_02_cidr}"]
   }
 
   egress {
