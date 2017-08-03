@@ -277,7 +277,7 @@ resource "aws_subnet" "prod_public_sn_01" {
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
   # availability_zone = "${lookup(var.availability_zone, var.region)}"
   tags {
-    Name = "prod_public_sn"
+    Name = "prod_public_sn_01"
   }
 }
 
@@ -288,7 +288,7 @@ resource "aws_subnet" "prod_public_sn_02" {
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
   # availability_zone = "${lookup(var.availability_zone, var.region)}"
   tags {
-    Name = "prod_public_sn"
+    Name = "prod_public_sn_02"
   }
 }
 
