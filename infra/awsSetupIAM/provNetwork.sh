@@ -124,13 +124,13 @@ apply_changes() {
     "Version from build $BUILD_NUMBER"
   ship_resource_put_state $OUT_PROD_VPC REGION $REGION
   ship_resource_put_state $OUT_PROD_VPC PROD_VPC_ID \
-    $(terraform output test_vpc_id)
+    $(terraform output prod_vpc_id)
   ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SN_01_ID \
-    $(terraform output test_public_sn_01_id)
+    $(terraform output prod_public_sn_01_id)
   ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SN_02_ID \
-    $(terraform output test_public_sn_02_id)
+    $(terraform output prod_public_sn_02_id)
   ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SG_ID \
-    $(terraform output test_public_sg_id)
+    $(terraform output prod_public_sg_id)
 
   popd
 }
