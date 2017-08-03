@@ -27,11 +27,15 @@ export AMI_VPC=$(ship_resource_get_param $RES_CONF AMI_VPC)
 export AMI_NETWORK_CIDR=$(ship_resource_get_param $RES_CONF AMI_NETWORK_CIDR)
 export AMI_PUBLIC_CIDR=$(ship_resource_get_param $RES_CONF AMI_PUBLIC_CIDR)
 export TEST_VPC=$(ship_resource_get_param $RES_CONF TEST_VPC)
-export TEST_NETWORK_CIDR=$(ship_resource_get_param $RES_CONF TEST_NETWORK_CIDR)
-export TEST_PUBLIC_CIDR=$(ship_resource_get_param $RES_CONF TEST_PUBLIC_CIDR)
+export TEST_NETWORK_01_CIDR=$(ship_resource_get_param $RES_CONF TEST_NETWORK_01_CIDR)
+export TEST_PUBLIC_01_CIDR=$(ship_resource_get_param $RES_CONF TEST_PUBLIC_01_CIDR)
+export TEST_NETWORK_02_CIDR=$(ship_resource_get_param $RES_CONF TEST_NETWORK_02_CIDR)
+export TEST_PUBLIC_02_CIDR=$(ship_resource_get_param $RES_CONF TEST_PUBLIC_02_CIDR)
 export PROD_VPC=$(ship_resource_get_param $RES_CONF PROD_VPC)
-export PROD_NETWORK_CIDR=$(ship_resource_get_param $RES_CONF PROD_NETWORK_CIDR)
-export PROD_PUBLIC_CIDR=$(ship_resource_get_param $RES_CONF PROD_PUBLIC_CIDR)
+export PROD_NETWORK_01_CIDR=$(ship_resource_get_param $RES_CONF PROD_NETWORK_01_CIDR)
+export PROD_PUBLIC_01_CIDR=$(ship_resource_get_param $RES_CONF PROD_PUBLIC_01_CIDR)
+export PROD_NETWORK_02_CIDR=$(ship_resource_get_param $RES_CONF PROD_NETWORK_02_CIDR)
+export PROD_PUBLIC_02_CIDR=$(ship_resource_get_param $RES_CONF PROD_PUBLIC_02_CIDR)
 
 set_context(){
   pushd $RES_REPO_CONTEXT
@@ -108,10 +112,14 @@ apply_changes() {
   ship_resource_put_state $OUT_TEST_VPC REGION $REGION
   ship_resource_put_state $OUT_TEST_VPC TEST_VPC_ID \
     $(terraform output test_vpc_id)
-  ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SN_ID \
-    $(terraform output test_public_sn_id)
-  ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SG_ID \
-    $(terraform output test_public_sg_id)
+  ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SN_01_ID \
+    $(terraform output test_public_sn_01_id)
+  ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SN_02_ID \
+    $(terraform output test_public_sn_02_id)
+  ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SG_01_ID \
+    $(terraform output test_public_sg_01_id)
+  ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SG_02_ID \
+    $(terraform output test_public_sg_02_id)
 
   #output PROD VPC
   ship_resource_post_state $OUT_PROD_VPC versionName \
@@ -119,10 +127,14 @@ apply_changes() {
   ship_resource_put_state $OUT_PROD_VPC REGION $REGION
   ship_resource_put_state $OUT_PROD_VPC PROD_VPC_ID \
     $(terraform output test_vpc_id)
-  ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SN_ID \
-    $(terraform output test_public_sn_id)
-  ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SG_ID \
-    $(terraform output test_public_sg_id)
+  ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SN_01_ID \
+    $(terraform output test_public_sn_01_id)
+  ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SN_02_ID \
+    $(terraform output test_public_sn_02_id)
+  ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SG_01_ID \
+    $(terraform output test_public_sg_01_id)
+  ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SG_02_ID \
+    $(terraform output test_public_sg_02_id)
 
   popd
 }

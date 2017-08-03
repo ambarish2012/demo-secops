@@ -119,7 +119,7 @@ resource "aws_internet_gateway" "test_ig" {
 # Public subnet 1
 resource "aws_subnet" "test_public_sn_01" {
   vpc_id = "${aws_vpc.test_vpc.id}"
-  cidr_block = "${var.test_public_cidr}"
+  cidr_block = "${var.test_public_01_cidr}"
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
   # availability_zone = "${lookup(var.availability_zone, var.region)}"
   tags {
@@ -130,7 +130,7 @@ resource "aws_subnet" "test_public_sn_01" {
 # Public subnet 2
 resource "aws_subnet" "test_public_sn_02" {
   vpc_id = "${aws_vpc.test_vpc.id}"
-  cidr_block = "${var.test_public_cidr}"
+  cidr_block = "${var.test_public_02_cidr}"
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
   # availability_zone = "${lookup(var.availability_zone, var.region)}"
   tags {
@@ -273,7 +273,7 @@ resource "aws_internet_gateway" "prod_ig" {
 # Public subnet 1
 resource "aws_subnet" "prod_public_sn_01" {
   vpc_id = "${aws_vpc.prod_vpc.id}"
-  cidr_block = "${var.prod_public_cidr}"
+  cidr_block = "${var.prod_public_01_cidr}"
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
   # availability_zone = "${lookup(var.availability_zone, var.region)}"
   tags {
@@ -284,7 +284,7 @@ resource "aws_subnet" "prod_public_sn_01" {
 # Public subnet 2
 resource "aws_subnet" "prod_public_sn_02" {
   vpc_id = "${aws_vpc.prod_vpc.id}"
-  cidr_block = "${var.prod_public_cidr}"
+  cidr_block = "${var.prod_public_02_cidr}"
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
   # availability_zone = "${lookup(var.availability_zone, var.region)}"
   tags {
