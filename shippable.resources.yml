@@ -44,15 +44,13 @@ resources:
         AMI_NETWORK_CIDR: "200.0.0.0/16"
         AMI_PUBLIC_CIDR: "200.0.0.0/24"
         TEST_VPC: "test_vpc"
-        TEST_NETWORK_01_CIDR: "210.0.0.0/16"
+        TEST_NETWORK_CIDR: "210.0.0.0/16"
         TEST_PUBLIC_01_CIDR: "210.0.0.0/24"
-        TEST_NETWORK_02_CIDR: "220.0.0.0/16"
-        TEST_PUBLIC_02_CIDR: "220.0.0.0/24"
+        TEST_PUBLIC_02_CIDR: "210.0.10.0/24"
         PROD_VPC: "prod_vpc"
-        PROD_NETWORK_01_CIDR: "100.0.0.0/16"
+        PROD_NETWORK_CIDR: "100.0.0.0/16"
         PROD_PUBLIC_01_CIDR: "100.0.0.0/24"
-        PROD_NETWORK_02_CIDR: "110.0.0.0/16"
-        PROD_PUBLIC_02_CIDR: "110.0.0.0/24"
+        PROD_PUBLIC_02_CIDR: "100.0.10.0/24"
     flags:
       - e2eShippableDemo
 
