@@ -66,11 +66,15 @@ set_context(){
   echo "ami_network_cidr = \"$AMI_NETWORK_CIDR\"" >> terraform.tfvars
   echo "ami_public_cidr = \"$AMI_PUBLIC_CIDR\"" >> terraform.tfvars
   echo "test_vpc = \"$TEST_VPC\"" >> terraform.tfvars
-  echo "test_network_cidr = \"$TEST_NETWORK_CIDR\"" >> terraform.tfvars
-  echo "test_public_cidr = \"$TEST_PUBLIC_CIDR\"" >> terraform.tfvars
+  echo "test_network_01_cidr = \"$TEST_NETWORK_01_CIDR\"" >> terraform.tfvars
+  echo "test_public_01_cidr = \"$TEST_PUBLIC_01_CIDR\"" >> terraform.tfvars
+  echo "test_network_02_cidr = \"$TEST_NETWORK_02_CIDR\"" >> terraform.tfvars
+  echo "test_public_02_cidr = \"$TEST_PUBLIC_02_CIDR\"" >> terraform.tfvars
   echo "prod_vpc = \"$PROD_VPC\"" >> terraform.tfvars
-  echo "prod_network_cidr = \"$PROD_NETWORK_CIDR\"" >> terraform.tfvars
-  echo "prod_public_cidr = \"$PROD_PUBLIC_CIDR\"" >> terraform.tfvars
+  echo "prod_network_01_cidr = \"$PROD_NETWORK_01_CIDR\"" >> terraform.tfvars
+  echo "prod_public_01_cidr = \"$PROD_PUBLIC_01_CIDR\"" >> terraform.tfvars
+  echo "prod_network_02_cidr = \"$PROD_NETWORK_02_CIDR\"" >> terraform.tfvars
+  echo "prod_public_02_cidr = \"$PROD_PUBLIC_02_CIDR\"" >> terraform.tfvars
 
   popd
 }
