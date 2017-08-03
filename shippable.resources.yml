@@ -72,20 +72,20 @@ resources:
     flags:
       - e2eShippableDemo
 
-# # OUT AWS TEST VPC IDs
-#   - name: test_vpc_conf
-#     type: params
-#     version:
-#       params:
-#         SEED: "initial_version"
-#     flags:
-#       - e2eShippableDemo
-#
-# # OUT AWS PROD VPC IDs
-#   - name: prod_vpc_conf
-#     type: params
-#     version:
-#       params:
-#         SEED: "initial_version"
-#     flags:
-#       - e2eShippableDemo
+# OUT AWS TEST VPC IDs
+  - name: test_vpc_conf
+    type: params
+    version:
+      params:
+        SEED: "initial_version"
+    flags:
+      - e2eShippableDemo
+
+# OUT AWS PROD VPC IDs
+  - name: prod_vpc_conf
+    type: params
+    version:
+      params:
+        SEED: "initial_version"
+    flags:
+      - e2eShippableDemo
