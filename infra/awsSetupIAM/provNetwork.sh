@@ -72,6 +72,8 @@ set_context(){
   echo "prod_public_01_cidr = \"$PROD_PUBLIC_01_CIDR\"" >> terraform.tfvars
   echo "prod_public_02_cidr = \"$PROD_PUBLIC_02_CIDR\"" >> terraform.tfvars
 
+  cat terraform.tfvars
+
   popd
 }
 

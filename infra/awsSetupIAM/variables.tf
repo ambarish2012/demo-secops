@@ -57,7 +57,7 @@ variable "test_vpc" {
 }
 
 variable "test_network_cidr" {
-  description = "IP addressing for Test Network 1"
+  description = "IP addressing for Test Network"
 }
 
 variable "test_public_01_cidr" {
@@ -75,7 +75,7 @@ variable "prod_vpc" {
 }
 
 variable "prod_network_cidr" {
-  description = "IP addressing for Prod Network 1"
+  description = "IP addressing for Prod Network"
 }
 
 variable "prod_public_01_cidr" {
