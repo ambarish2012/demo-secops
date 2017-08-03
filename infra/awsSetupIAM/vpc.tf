@@ -235,14 +235,6 @@ resource "aws_vpc" "prod_vpc" {
   }
 }
 
-output "testCIDR" {
-  value = "${var.test_network_cidr}"
-}
-
-output "prodCIDR" {
-  value = "${var.prod_network_cidr}"
-}
-
 # Internet gateway for the public subnet
 resource "aws_internet_gateway" "prod_ig" {
   vpc_id = "${aws_vpc.prod_vpc.id}"

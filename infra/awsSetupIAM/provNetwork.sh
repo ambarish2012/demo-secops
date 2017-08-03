@@ -72,8 +72,6 @@ set_context(){
   echo "prod_public_01_cidr = \"$PROD_PUBLIC_01_CIDR\"" >> terraform.tfvars
   echo "prod_public_02_cidr = \"$PROD_PUBLIC_02_CIDR\"" >> terraform.tfvars
 
-  cat terraform.tfvars
-
   popd
 }
 
@@ -118,10 +116,8 @@ apply_changes() {
     $(terraform output test_public_sn_01_id)
   ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SN_02_ID \
     $(terraform output test_public_sn_02_id)
-  ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SG_01_ID \
-    $(terraform output test_public_sg_01_id)
-  ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SG_02_ID \
-    $(terraform output test_public_sg_02_id)
+  ship_resource_put_state $OUT_TEST_VPC TEST_PUBLIC_SG_ID \
+    $(terraform output test_public_sg_id)
 
   #output PROD VPC
   ship_resource_post_state $OUT_PROD_VPC versionName \
@@ -133,10 +129,8 @@ apply_changes() {
     $(terraform output test_public_sn_01_id)
   ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SN_02_ID \
     $(terraform output test_public_sn_02_id)
-  ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SG_01_ID \
-    $(terraform output test_public_sg_01_id)
-  ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SG_02_ID \
-    $(terraform output test_public_sg_02_id)
+  ship_resource_put_state $OUT_PROD_VPC PROD_PUBLIC_SG_ID \
+    $(terraform output test_public_sg_id)
 
   popd
 }
