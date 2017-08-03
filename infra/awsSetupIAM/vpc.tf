@@ -210,7 +210,7 @@ resource "aws_security_group" "test_public_sg" {
     to_port = 0
     protocol = "tcp"
     cidr_blocks = [
-      "${var.test_public_01_cidr}"]
+      "${var.test_public_01_cidr}"
       "${var.test_public_02_cidr}"]
   }
 
@@ -366,7 +366,7 @@ resource "aws_security_group" "prod_public_sg" {
     to_port = 0
     protocol = "tcp"
     cidr_blocks = [
-      "${var.prod_public_01_cidr}"]
+      "${var.prod_public_01_cidr}"
       "${var.prod_public_02_cidr}"]
   }
 
