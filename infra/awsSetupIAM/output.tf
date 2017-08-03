@@ -39,7 +39,7 @@ output "prod_vpc_id" {
   value = "${aws_vpc.prod_vpc.id}"
 }
 
-output "prod_public_sn_01"_id {
+output "prod_public_sn_01_id" {
   value = "${aws_subnet.prod_public_sn_01.id}"
 }
 
