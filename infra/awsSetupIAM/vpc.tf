@@ -102,8 +102,10 @@ data "aws_availability_zones" "available" {}
 
 # Define a vpc
 resource "aws_vpc" "test_vpc" {
-  cidr_block = "${var.test_network_01_cidr}"
-  cidr_block = "${var.test_network_02_cidr}"
+  cidr_block = [
+    "${var.prod_network_01_cidr}",
+    "${var.prod_network_02_cidr}"
+  ]
   tags {
     Name = "${var.test_vpc}"
   }
@@ -230,8 +232,10 @@ resource "aws_security_group" "test_public_sg" {
 #========================== PROD VPC =============================
 # Define a vpc
 resource "aws_vpc" "prod_vpc" {
-  cidr_block = "${var.prod_network_01_cidr}"
-  cidr_block = "${var.prod_network_02_cidr}"
+cidr_block = [
+  "${var.prod_network_01_cidr}",
+  "${var.prod_network_02_cidr}"
+]
   tags {
     Name = "${var.prod_vpc}"
   }
